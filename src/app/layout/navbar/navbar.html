@@ -1,0 +1,10 @@
+<nav class="navbar">
+  <a class="brand" routerLink="/products">Product Manager</a>
+
+  @if (isAuthenticated()) {
+    <div class="right">
+      <span class="user">{{ currentUser()?.username }}</span>
+      <button type="button" (click)="logout()">Logout</button>
+    </div>
+  }
+</nav>

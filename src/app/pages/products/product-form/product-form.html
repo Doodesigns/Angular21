@@ -1,0 +1,59 @@
+<div class="page">
+  <h1>{{ isEditMode() ? 'Edit product' : 'New product' }}</h1>
+
+  @if (loading()) {
+    <p>Loading…</p>
+  } @else {
+    <form class="product-form" [formGroup]="form" (ngSubmit)="submit()">
+      <label>
+        Title
+        <input type="text" formControlName="title" />
+      </label>
+
+      <label>
+        Description
+        <textarea formControlName="description" rows="3"></textarea>
+      </label>
+
+      <div class="row">
+        <label>
+          Category
+          <input type="text" formControlName="category" />
+        </label>
+
+        <label>
+          Brand
+          <input type="text" formControlName="brand" />
+        </label>
+      </div>
+
+      <div class="row">
+        <label>
+          Price
+          <input type="number" formControlName="price" min="0" step="0.01" />
+        </label>
+
+        <label>
+          Discount %
+          <input type="number" formControlName="discountPercentage" min="0" max="100" />
+        </label>
+
+        <label>
+          Stock
+          <input type="number" formControlName="stock" min="0" />
+        </label>
+      </div>
+
+      @if (errorMessage()) {
+        <p class="error">{{ errorMessage() }}</p>
+      }
+
+      <div class="actions">
+        <button type="button" class="btn" (click)="cancel()">Cancel</button>
+        <button type="submit" class="btn primary" [disabled]="saving()">
+          {{ saving() ? 'Saving…' : 'Save' }}
+        </button>
+      </div>
+    </form>
+  }
+</div>
